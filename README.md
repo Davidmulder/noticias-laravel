@@ -1,127 +1,143 @@
 # 📰 Projeto Notícias – Laravel 11
 
 
+Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida em **Laravel 11+**, com **SQLite**, **Seeder** (lendo um feed XML local) e interface responsiva com **Bootstrap 5**.
 
-- 📋 **Listagem de notícias**
-- 📰 **Detalhe da notícia**
+## ✅ Requisitos do teste atendidos
 
-O projeto utiliza **SQLite** como banco de dados, **Seeder** para popular dados reais a partir de um feed XML e **Bootstrap** para layout responsivo no front-end.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-- **PHP 8.2+**
-- **Laravel 11**
-- **SQLite**
-- **Blade**
-- **Bootstrap 5**
-- **Eloquent ORM**
-- **Migrations, Seeders, Controllers, Models e Routes**
+- [x] Laravel 11+
+- [x] Routes
+- [x] Migration
+- [x] Controller
+- [x] Model
+- [x] Seeder
+- [x] Views (Blade)
+- [x] Listagem com paginação
+- [x] Tela de detalhe
 
 ---
 
-## 📂 Estrutura Funcional
+## 🧰 Tecnologias
 
-- `routes/web.php` → rotas da aplicação
-- `app/Models/News.php` → model da notícia
+- PHP 8.2+
+- Laravel 11
+- SQLite
+- Blade
+- Bootstrap 5
+- Eloquent ORM
+
+---
+
+## 📌 Funcionalidades
+
+### 1) Listagem de notícias
+- Cards responsivos com:
+  - Imagem (quando existir)
+  - Título
+  - Resumo
+  - Link para detalhe
+- Paginação com Bootstrap
+
+### 2) Detalhe da notícia
+- Exibe:
+  - Título
+  - Imagem (quando existir)
+  - Texto completo
+- Acesso por URL amigável (`slug`)
+
+---
+
+## 🗂️ Estrutura (principais arquivos)
+
+- `routes/web.php` → rotas
+- `app/Models/News.php` → model `News`
 - `app/Http/Controllers/NewsController.php` → controller
-- `database/migrations` → estrutura da tabela `news`
-- `database/seeders/NewsSeeder.php` → seed com feed XML
-- `resources/views/news` → views (listagem e detalhe)
-- `storage/app/feed/tecnologia.xml` → feed local de notícias
+- `database/migrations/*create_news_table.php` → migration
+- `database/seeders/NewsSeeder.php` → seed via feed XML
+- `resources/views/news/index.blade.php` → listagem
+- `resources/views/news/show.blade.php` → detalhe
+- `storage/app/feed/tecnologia.xml` → feed local (XML)
 
 ---
 
-## 🗄️ Banco de Dados
+## ⚙️ Como rodar o projeto localmente
 
-O projeto utiliza **SQLite** para facilitar a execução local.
-
-Arquivo do banco:
+### 1) Clonar o repositório
 ```bash
-database/database.sqlite
-
-
-⚙️ Instalação do Projeto
-1️⃣ Clonar o repositório
-git clone https://seu-repositorio.git
+git clone https://github.com/SEU_USUARIO/SEU_REPO.git
 cd noticias-laravel
-
-2️⃣ Instalar dependências
+2) Instalar dependências
 composer install
-
-3️⃣ Criar arquivo de ambiente
+3) Criar .env e gerar chave
 cp .env.example .env
 php artisan key:generate
+4) Configurar SQLite
+Crie o arquivo do banco:
 
-4️⃣ Criar banco SQLite
+Windows (PowerShell):
+
+New-Item -ItemType File -Path database\database.sqlite -Force
+Linux/Mac:
+
 touch database/database.sqlite
+No .env, ajuste:
 
-5️⃣ Rodar migrations
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+5) Rodar migrations
 php artisan migrate
-
-🌱 Popular o Banco (Seeder)
-
-O projeto usa um Seeder que lê um arquivo XML de feed de notícias, simulando dados reais.
-
-Execute:
-
+6) Rodar Seeder (importa até 10 notícias do XML)
 php artisan db:seed --class=NewsSeeder
+O seed:
 
+lê storage/app/feed/tecnologia.xml
 
-✔️ O seeder:
+insere/atualiza notícias usando a URL como chave (evita duplicados)
 
-Lê até 10 notícias
+gera resumo automaticamente
 
-Evita duplicação por URL
+marca publicar = true
 
-Gera resumo automaticamente
-
-Marca notícias como publicadas
-
-🌐 Rotas da Aplicação
-GET /              → Listagem de notícias
-GET /noticia/{slug} → Detalhe da notícia
-
-🖥️ Interface (Front-end)
-
-Desenvolvida com Bootstrap 5
-
-Totalmente responsiva
-
-Listagem com:
-
-Card de notícia
-
-Imagem
-
-Título
-
-Resumo
-
-Paginação
-
-Página de detalhe com:
-
-Título
-
-Imagem
-
-Texto completo
-
-🔐 Segurança
-
-O projeto segue as boas práticas padrão do Laravel:
-
-✔️ Eloquent ORM (proteção automática contra SQL Injection)
-
-✔️ Blade com escaping automático ({{ }})
-
-✔️ Route Model Binding
-
-✔️ CSRF Protection (nativo)
-
-✔️ Nenhum SQL bruto (DB::raw) foi utilizado
-
-▶️ Executar o Projeto
+7) Subir servidor local
 php artisan serve
+Acesse:
+
+Listagem: http://127.0.0.1:8000/
+
+Detalhe: http://127.0.0.1:8000/noticia/{slug}
+
+🌐 Rotas
+GET / → listagem (paginada)
+
+GET /noticia/{slug} → detalhe da notícia
+
+🔐 Segurança (boas práticas do Laravel)
+Este projeto usa recursos nativos do Laravel que já entregam uma boa base de segurança:
+
+Eloquent ORM → ajuda a prevenir SQL Injection (queries parametrizadas)
+
+Blade com escaping ({{ }}) → reduz risco de XSS
+
+Route Model Binding / busca por slug
+
+CSRF protection (caso existam forms com POST no futuro)
+
+Observação: como o escopo do teste é leitura (listagem/detalhe), não há formulários críticos no fluxo principal.
+
+🧯 Troubleshooting
+Seeder não encontra o XML
+Verifique se o arquivo existe em:
+storage/app/feed/tecnologia.xml
+
+E se o caminho do seeder está correto:
+
+$path = storage_path('app/feed/tecnologia.xml');
+Banco SQLite não funciona
+Confirme no .env:
+
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+📤 Entrega
+Publicado no GitHub: (cole aqui o link do repositório)
+
+Instruções completas de execução neste README
