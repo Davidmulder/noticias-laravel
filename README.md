@@ -64,7 +64,7 @@ Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida e
 
 ### 1) Clonar o repositório
 ```bash
-git clone https://github.com/SEU_USUARIO/SEU_REPO.git
+git clone https://github.com/Davidmulder/noticias-laravel
 cd noticias-laravel
 2) Instalar dependências
 composer install
