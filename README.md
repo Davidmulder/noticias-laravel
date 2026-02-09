@@ -1,9 +1,9 @@
-# 📰 Projeto Notícias – Laravel 11
+### 📰 Projeto Notícias – Laravel 11
 
 
 Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida em **Laravel 11+**, com **SQLite**, **Seeder** (lendo um feed XML local) e interface responsiva com **Bootstrap 5**.
 
-## ✅ Requisitos do teste atendidos
+### ✅ Requisitos do teste atendidos
 
 - [x] Laravel 11+
 - [x] Routes
@@ -17,7 +17,7 @@ Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida e
 
 ---
 
-## 🧰 Tecnologias
+### 🧰 Tecnologias
 
 - PHP 8.2+
 - Laravel 11
@@ -28,7 +28,7 @@ Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida e
 
 ---
 
-## 📌 Funcionalidades
+### 📌 Funcionalidades
 
 ### 1) Listagem de notícias
 - Cards responsivos com:
@@ -47,7 +47,7 @@ Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida e
 
 ---
 
-## 🗂️ Estrutura (principais arquivos)
+### 🗂️ Estrutura (principais arquivos)
 
 - `routes/web.php` → rotas
 - `app/Models/News.php` → model `News`
@@ -60,11 +60,11 @@ Aplicação simples para **listagem** e **detalhe** de notícias, desenvolvida e
 
 ---
 
-## ⚙️ Como rodar o projeto localmente
+### ⚙️ Como rodar o projeto localmente
 
 ### 1) Clonar o repositório
 ```bash
-git clone https://github.com/SEU_USUARIO/SEU_REPO.git
+git clone https://github.com/Davidmulder/noticias-laravel.git
 cd noticias-laravel
 2) Instalar dependências
 composer install
@@ -137,7 +137,6 @@ Confirme no .env:
 
 DB_CONNECTION=sqlite
 DB_DATABASE=database/database.sqlite
-📤 Entrega
-Publicado no GitHub: (cole aqui o link do repositório)
 
-Instruções completas de execução neste README
+
+
